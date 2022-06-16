@@ -1,7 +1,7 @@
 package main
 
-import "fmt"
+import "github.com/FuradWho/Cherry/internal/apiserver"
 
 func main() {
-	fmt.Println("1111")
+	apiserver.NewGoServer()
 }
