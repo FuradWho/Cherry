@@ -1,10 +1,11 @@
 package store
 
-import "context"
+import (
+	"context"
+
+	metav1 "github.com/FuradWho/Cherry/internal/pkg/model/goserver/v1"
+)
 
 type EmployeeStore interface {
-
-	// , user *v1.User, opts metav1.CreateOptions
-
-	Create(ctx context.Context) error
+	Register(ctx context.Context, employee *metav1.Employee) error
 }

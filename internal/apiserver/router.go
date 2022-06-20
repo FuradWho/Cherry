@@ -50,7 +50,7 @@ func installController(g *gin.Engine) {
 	{
 		userv1 := v1.Group("/users")
 		{
-			userv1.GET("", employeesController.Get)
+			userv1.POST("", employeesController.Get)
 		}
 	}
 

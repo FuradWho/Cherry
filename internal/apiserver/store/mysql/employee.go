@@ -2,6 +2,7 @@ package mysql
 
 import (
 	"context"
+	metav1 "github.com/FuradWho/Cherry/internal/pkg/model/goserver/v1"
 	"gorm.io/gorm"
 )
 
@@ -9,12 +10,11 @@ type employees struct {
 	db *gorm.DB
 }
 
-func newUsers(ds *datastore) *employees {
+func newEmployees(ds *datastore) *employees {
 	return &employees{ds.db}
 }
 
-// Create creates a new user account.
-func (u *employees) Create(ctx context.Context) error {
-	// u.db.Create(&employee).Error
-	return nil
+// Register register a new user account.
+func (u *employees) Register(ctx context.Context, employee *metav1.Employee) error {
+	return u.db.Create(&employee).Error
 }
