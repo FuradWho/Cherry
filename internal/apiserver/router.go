@@ -37,20 +37,18 @@ func installController(g *gin.Engine) {
 		core.WriteResponse(c, nil, map[string]string{"status": "ok"})
 	})
 
-	// The user handlers, requiring authentication
-	//v1 := g.Group("/v1")
-	//{
-	//
-	//}
-
 	storeIns, _ := mysql.GetMySQLFactoryOr()
 	employeesController := employee.NewEmployeesController(storeIns)
 
 	v1 := g.Group("/v1")
 	{
-		userv1 := v1.Group("/users")
+		employeeV1 := v1.Group("/employees")
 		{
-			userv1.POST("", employeesController.Get)
+			employeeV1.POST("register", employeesController.Register)
+			employeeV1.POST("nft_application", employeesController.NFTApplication)
+			employeeV1.GET("nft_audit", employeesController.NFTAudit)
+
+			// NFTApplication
 		}
 	}
 

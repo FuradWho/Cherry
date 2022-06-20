@@ -7,8 +7,8 @@ import (
 	"github.com/gin-gonic/gin"
 )
 
-// Get  get an user by the user identifier.
-func (u *EmployeesController) Get(c *gin.Context) {
+// Register  get an user by the user identifier.
+func (u *EmployeesController) Register(c *gin.Context) {
 
 	var r metav1.Employee
 
@@ -18,8 +18,15 @@ func (u *EmployeesController) Get(c *gin.Context) {
 		return
 	}
 
+	err = r.Validate()
+	if err != nil {
+		core.WriteResponse(c, errno.ErrValidation, nil)
+		return
+	}
+
 	err = u.srv.Employees().Register(c, &r)
 	if err != nil {
+		core.WriteResponse(c, err, nil)
 		return
 	}
 
